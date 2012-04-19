@@ -9,5 +9,9 @@ module Asana
       parent_resources :workspace
       all(*args)
     end
+
+    def stories
+      Story.all_by_task(:params => { :task_id => self.id })
+    end
   end
 end
