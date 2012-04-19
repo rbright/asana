@@ -8,6 +8,8 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Ruby wrapper for the Asana REST API}
   gem.homepage      = "http://github.com/rbright/asana"
 
+  gem.add_dependency 'activeresource', '~> 3.2.3'
+
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
