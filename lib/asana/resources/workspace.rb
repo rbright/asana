@@ -7,6 +7,10 @@ module Asana
       Project.all_by_workspace(:params => { :workspace_id => self.id })
     end
 
+    def tasks
+      Task.all_by_workspace(:params => { :workspace_id => self.id })
+    end
+
     def users
       User.all_by_workspace(:params => { :workspace_id => self.id })
     end
