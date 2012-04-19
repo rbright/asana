@@ -3,6 +3,10 @@ module Asana
     alias :create :method_not_allowed
     alias :destroy :method_not_allowed
 
+    def projects
+      Project.all_by_workspace(:params => { :workspace_id => self.id })
+    end
+
     def users
       User.all_by_workspace(:params => { :workspace_id => self.id })
     end
