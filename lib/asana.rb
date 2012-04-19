@@ -3,6 +3,8 @@ require 'asana/config'
 require 'asana/version'
 
 require 'asana/resources/user'
+require 'asana/resources/workspace'
+
 module Asana
   extend Config
 end

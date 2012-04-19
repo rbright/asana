@@ -6,5 +6,10 @@ module Asana
     def self.me
       get(:me)
     end
+
+    def self.all_by_workspace(*args)
+      parent_resources :workspace
+      all(*args)
+    end
   end
 end
