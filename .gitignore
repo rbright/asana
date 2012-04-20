@@ -1,5 +1,7 @@
 *.gem
 *.rbc
+*.un~
+.DS_Store
 .bundle
 .config
 .yardoc
@@ -11,9 +13,8 @@ doc/
 lib/bundler/man
 pkg
 rdoc
+spec/fixtures/cassettes
 spec/reports
 test/tmp
 test/version_tmp
 tmp
-.DS_Store
-*.un~
