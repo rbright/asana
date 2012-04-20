@@ -5,6 +5,15 @@ module Asana
       def check_prefix_options(options)
       end
 
+      def custom_method_collection_url(method_name, options = {})
+        prefix_options, query_options = split_options(options)
+        if method_name
+          "#{prefix(prefix_options)}#{collection_name}/#{method_name}.#{format.extension}#{query_string(query_options)}"
+        else
+          "#{prefix(prefix_options)}#{collection_name}.#{format.extension}#{query_string(query_options)}"
+        end
+      end
+
       def parent_resources(*resources)
         @parent_resources = resources
       end
