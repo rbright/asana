@@ -11,6 +11,11 @@ module Asana
       query_options = { :workspace => self.id, :assignee => assignee }
       Task.all_by_workspace(:params => query_options)
     end
+
+    def create_task(*args)
+      task = Task.new
+      query_options = { :workspace => self.id, :assignee => 'me' }
+      Task.post(nil, query_options.merge(args.first), task.to_json)
     end
 
     def users

@@ -86,6 +86,9 @@ tasks = workspace.tasks(:user_id)
 
 # Get all users with access to a given workspace
 users = workspace.users
+
+# Create a new task in a given workspace and assign it to the current user
+workspace.create_task(task_settings)
 ```
 
 ### [Projects][]
@@ -127,6 +130,9 @@ tasks = workspace.tasks
 # Get all stories for a given task
 task = tasks.first
 stories = task.stories
+
+# Create a new task in a given workspace and assign it to the current user
+workspace.create_task(task_settings)
 ```
 
 ### [Stories][]

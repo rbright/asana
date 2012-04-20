@@ -22,6 +22,14 @@ module Asana
       end
     end
 
+    describe '#create_task' do
+      it 'should create a new task for the given workspace' do
+        workspace = Workspace.all.first
+        task = workspace.create_task(:name => 'foo')
+        task.must_be_instance_of Net::HTTPCreated
+      end
+    end
+
     describe '#projects' do
       it 'should return all projects for the given workspace' do
         workspace = Workspace.all.first
