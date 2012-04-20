@@ -6,5 +6,9 @@ module Asana
       parent_resources :workspace
       all(*args)
     end
+
+    def tasks
+      Task.all_by_project(:params => { :project_id => self.id })
+    end
   end
 end
