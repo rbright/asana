@@ -34,7 +34,8 @@ module Asana
     describe '#tasks' do
       it 'should return all tasks for the given workspace' do
         workspace = Workspace.all.first
-        tasks = workspace.tasks
+        user = User.all.first
+        tasks = workspace.tasks(user.id)
         tasks.must_be_instance_of Array
         tasks.first.must_be_instance_of Task
       end

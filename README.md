@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-In order to access Asana, you need to provide your [API key][1].
+In order to access Asana, you need to provide your [API key][].
 
 
 ```ruby
@@ -81,8 +81,8 @@ workspace = Asana::Workspace.find(:id)
 # Get all projects in a given workspace
 projects = workspace.projects
 
-# Get all tasks in a given workspace
-tasks = workspace.tasks
+# Get all tasks in a given workspace and assigned to the given user
+tasks = workspace.tasks(:user_id)
 
 # Get all users with access to a given workspace
 users = workspace.users
@@ -153,7 +153,7 @@ stories = task.stories
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-[1]: http://app.asana.com/-/account_api
+[API key]: http://app.asana.com/-/account_api
 [ActiveResource]: http://api.rubyonrails.org/classes/ActiveResource/Base.html
 [Asana API Documentation]: http://developer.asana.com/documentation/
 [Users]: http://developer.asana.com/documentation/#users

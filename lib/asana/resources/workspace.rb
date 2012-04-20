@@ -7,8 +7,10 @@ module Asana
       Project.all_by_workspace(:params => { :workspace_id => self.id })
     end
 
-    def tasks
-      Task.all_by_workspace(:params => { :workspace_id => self.id })
+    def tasks(assignee)
+      query_options = { :workspace => self.id, :assignee => assignee }
+      Task.all_by_workspace(:params => query_options)
+    end
     end
 
     def users
