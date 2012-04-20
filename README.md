@@ -133,6 +133,9 @@ stories = task.stories
 
 # Create a new task in a given workspace and assign it to the current user
 workspace.create_task(task_settings)
+
+# Create a new story for the given task
+task.create_story(story_settings)
 ```
 
 ### [Stories][]
@@ -149,6 +152,9 @@ workspace.create_task(task_settings)
 project = Asana::Project(:project_id)
 task = project.tasks.first
 stories = task.stories
+
+# Create a new story for the given task
+task.create_story(story_settings)
 ```
 
 ## Contributing

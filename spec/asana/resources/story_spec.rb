@@ -14,6 +14,14 @@ module Asana
       VCR.eject_cassette
     end
 
+    describe '#create_story' do
+      it 'should create a new story for the given task' do
+        task = Project.all.first.tasks.first
+        story = task.create_story(:text => 'foo')
+        story.must_be_instance_of Net::HTTPCreated
+      end
+    end
+
     describe '#update' do
       it 'should raise an ActiveResource::MethodNotAllowed exception' do
         story = Project.all.first.tasks.first.stories.first
