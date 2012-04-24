@@ -44,6 +44,14 @@ module Asana
       end
     end
 
+    describe '#update' do
+      it 'should update the given workspace with a new name' do
+        workspace = Workspace.all.last
+        workspace.update_attribute(:name, 'foo')
+        workspace.name.must_equal 'foo'
+      end
+    end
+
     describe '#destroy' do
       it 'should raise an ActiveResource::MethodNotAllowed exception' do
         workspace = Workspace.all.first
