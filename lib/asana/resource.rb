@@ -44,5 +44,9 @@ module Asana
       raise ActiveResource::MethodNotAllowed.new(__method__)
     end
 
+    def to_json(options={})
+      super({ :root => 'data' }.merge(options))
+    end
+
   end
 end
