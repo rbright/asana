@@ -4,7 +4,7 @@ module Asana
   describe Project do
 
     before do
-      VCR.insert_cassette('projects', :record => :new_episodes)
+      VCR.insert_cassette('projects', :record => :all)
       Asana.configure do |c|
         c.api_key = ENV['ASANA_API_KEY']
       end
@@ -22,19 +22,33 @@ module Asana
       end
     end
 
-    describe '.all_by_workspace' do
-      it 'should return all projects for the given workspace' do
-        workspace = Workspace.all.first
-        projects = workspace.projects
-        projects.must_be_instance_of Array
-        projects.first.must_be_instance_of Project
-      end
-    end
-
     describe '.create' do
       it 'should raise an ActiveResource::MethodNotAllowed exception' do
         project = Project.new
         lambda { project.save }.must_raise ActiveResource::MethodNotAllowed
+      end
+    end
+
+    describe '.find' do
+      it 'should return a single project' do
+        project = Project.find(Project.all.first.id)
+        project.must_be_instance_of Project
+      end
+    end
+
+    describe '#destroy' do
+      it 'should raise an ActiveResource::MethodNotAllowed exception' do
+        project = Project.all.first
+        lambda { project.destroy}.must_raise ActiveResource::MethodNotAllowed
+      end
+    end
+
+    describe '#update' do
+      it 'should update the given project with a new name' do
+        project = Project.all.last
+        #project.name.wont_equal 'foo'
+        project.update_attribute(:name, 'foo')
+        project.name.must_equal 'foo'
       end
     end
 

@@ -4,7 +4,7 @@ module Asana
   describe Story do
 
     before do
-      VCR.insert_cassette('stories', :record => :new_episodes)
+      VCR.insert_cassette('stories', :record => :all)
       Asana.configure do |c|
         c.api_key = ENV['ASANA_API_KEY']
       end
@@ -14,11 +14,17 @@ module Asana
       VCR.eject_cassette
     end
 
-    describe '#create_story' do
-      it 'should create a new story for the given task' do
-        task = Project.all.first.tasks.first
-        story = task.create_story(:text => 'foo')
-        story.must_be_instance_of Net::HTTPCreated
+    describe '.find' do
+      it 'should return a single story' do
+        story_id = Project.all.first.tasks.first.stories.first.id
+        Story.find(story_id).must_be_instance_of Story
+      end
+    end
+
+    describe '#destroy' do
+      it 'should raise an ActiveResource::MethodNotAllowed exception' do
+        story = Project.all.first.tasks.first.stories.first
+        lambda { story.destroy }.must_raise ActiveResource::MethodNotAllowed
       end
     end
 

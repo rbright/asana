@@ -4,7 +4,7 @@ module Asana
   describe Task do
 
     before do
-      VCR.insert_cassette('tasks', :record => :new_episodes)
+      VCR.insert_cassette('tasks', :record => :all)
       Asana.configure do |c|
         c.api_key = ENV['ASANA_API_KEY']
       end
@@ -12,6 +12,14 @@ module Asana
 
     after do
       VCR.eject_cassette
+    end
+
+    describe '#create_story' do
+      it 'should create a new story for the given task' do
+        task = Project.all.first.tasks.first
+        story = task.create_story(:text => 'foo')
+        story.must_be_instance_of Story
+      end
     end
 
     describe '#stories' do

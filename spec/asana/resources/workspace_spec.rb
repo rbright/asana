@@ -4,7 +4,7 @@ module Asana
   describe Workspace do
 
     before do
-      VCR.insert_cassette('workspaces', :record => :new_episodes)
+      VCR.insert_cassette('workspaces', :record => :all)
       Asana.configure do |c|
         c.api_key = ENV['ASANA_API_KEY']
       end
@@ -22,11 +22,32 @@ module Asana
       end
     end
 
+    describe '.find' do
+      it 'should return a single workspace' do
+        workspace = Workspace.find(Workspace.all.first.id)
+        workspace.must_be_instance_of Workspace
+      end
+    end
+
+    describe '#create' do
+      it 'should raise an ActiveResource::MethodNotAllowed exception' do
+        workspace = Workspace.new
+        lambda { workspace.save }.must_raise ActiveResource::MethodNotAllowed
+      end
+    end
+
     describe '#create_task' do
       it 'should create a new task for the given workspace' do
         workspace = Workspace.all.first
-        task = workspace.create_task(:name => 'foo')
-        task.must_be_instance_of Net::HTTPCreated
+        task = workspace.create_task(:name => 'this is it', :assignee => 'me')
+        task.must_be_instance_of Task
+      end
+    end
+
+    describe '#destroy' do
+      it 'should raise an ActiveResource::MethodNotAllowed exception' do
+        workspace = Workspace.all.first
+        lambda { workspace.destroy }.must_raise ActiveResource::MethodNotAllowed
       end
     end
 
@@ -55,20 +76,6 @@ module Asana
         users = workspace.users
         users.must_be_instance_of Array
         users.first.must_be_instance_of User
-      end
-    end
-
-    describe '#create' do
-      it 'should raise an ActiveResource::MethodNotAllowed exception' do
-        workspace = Workspace.new
-        lambda { workspace.save }.must_raise ActiveResource::MethodNotAllowed
-      end
-    end
-
-    describe '#destroy' do
-      it 'should raise an ActiveResource::MethodNotAllowed exception' do
-        workspace = Workspace.all.first
-        lambda { workspace.destroy }.must_raise ActiveResource::MethodNotAllowed
       end
     end
 

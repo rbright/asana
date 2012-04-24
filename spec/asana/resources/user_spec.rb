@@ -4,7 +4,7 @@ module Asana
   describe User do
 
     before do
-      VCR.insert_cassette('users', :record => :new_episodes)
+      VCR.insert_cassette('users', :record => :all)
       Asana.configure do |c|
         c.api_key = ENV['ASANA_API_KEY']
       end
@@ -15,18 +15,8 @@ module Asana
     end
 
     describe '.all' do
-      it 'should return all users for all of the user\'s workspaces' do
+      it 'should return all users for all of the given user\'s workspaces' do
         users = User.all
-        users.must_be_instance_of Array
-        users.first.must_be_instance_of User
-      end
-    end
-
-    describe '.all_by_workspace' do
-      it 'should return all users for the given workspace' do
-        user = User.me
-        workspace = user.workspaces.first
-        users = workspace.users
         users.must_be_instance_of Array
         users.first.must_be_instance_of User
       end
@@ -49,6 +39,13 @@ module Asana
       end
     end
 
+    describe '#destroy' do
+      it 'should raise an ActiveResource::MethodNotAllowed exception' do
+        user = User.me
+        lambda { user.destroy }.must_raise ActiveResource::MethodNotAllowed
+      end
+    end
+
     describe '#save' do
       it 'should raise an ActiveResource::MethodNotAllowed exception' do
         user = User.me
@@ -60,13 +57,6 @@ module Asana
       it 'should raise an ActiveResource::MethodNotAllowed exception' do
         user = User.me
         lambda { user.update_attribute(:name, 'foo') }.must_raise ActiveResource::MethodNotAllowed
-      end
-    end
-
-    describe '#destroy' do
-      it 'should raise an ActiveResource::MethodNotAllowed exception' do
-        user = User.me
-        lambda { user.destroy }.must_raise ActiveResource::MethodNotAllowed
       end
     end
 
