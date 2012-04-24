@@ -54,7 +54,7 @@ the API.
 users = Asana::User.all
 
 # Get a specific user
-user = Asana::User.find(:id)
+user = Asana::User.find(:user_id)
 
 # Get the user associated with the API key being used
 user = Asana::User.me
@@ -76,19 +76,19 @@ users = workspace.users
 workspaces = Asana::Workspace.all
 
 # Get a specific workspace
-workspace = Asana::Workspace.find(:id)
+workspace = Asana::Workspace.find(:workspace_id)
 
 # Get all projects in a given workspace
 projects = workspace.projects
 
-# Get all tasks in a given workspace and assigned to the given user
+# Get all tasks in a given workspace that are assigned to the given user
 tasks = workspace.tasks(:user_id)
 
 # Get all users with access to a given workspace
 users = workspace.users
 
 # Create a new task in a given workspace and assign it to the current user
-workspace.create_task(task_settings)
+workspace.create_task(:name => 'Get milk from the grocery store')
 ```
 
 ### [Projects][]
@@ -97,14 +97,14 @@ workspace.create_task(task_settings)
 > single workspace and is accessible to a subset of users in that workspace
 > depending on its permissions.
 
-**Note:** It is not possible to create a project from the API.
+**Note:** It is not possible to create or delete a project from the API.
 
 ```ruby
 # Get all projects
 projects = Asana::Project.all
 
 # Get a specific project
-project = Asana::Project.find(:id)
+project = Asana::Project.find(:project_id)
 
 # Get all projects in a given workspace
 workspace = Asana::Workspace.find(:workspace_id)
@@ -120,11 +120,11 @@ projects = workspace.projects
 
 ```ruby
 # Get all tasks in a given project
-project = Asana::Project(:project_id)
+project = Asana::Project.find(:project_id)
 tasks = project.tasks
 
 # Get all tasks in a given workspace
-workspace = Asana::Workspace(:workspace_id)
+workspace = Asana::Workspace.find(:workspace_id)
 tasks = workspace.tasks
 
 # Get all stories for a given task
@@ -132,7 +132,7 @@ task = tasks.first
 stories = task.stories
 
 # Create a new task in a given workspace and assign it to the current user
-workspace.create_task(task_settings)
+workspace.create_task(:name => 'Get milk from the grocery store')
 
 # Create a new story for the given task
 task.create_story(story_settings)
@@ -145,13 +145,16 @@ task.create_story(story_settings)
 > such as creating or assigning tasks, or moving tasks between projects.
 > Comments are also a form of user-generated story.
 
-**Note:** It is not possible to update a story from the API.
+**Note:** It is not possible to update or delete a story from the API.
 
 ```ruby
 # Get all stories for a given task
-project = Asana::Project(:project_id)
+project = Asana::Project.find(:project_id)
 task = project.tasks.first
 stories = task.stories
+
+# Get a specific story
+story = Story.find(:story_id)
 
 # Create a new story for the given task
 task.create_story(story_settings)
