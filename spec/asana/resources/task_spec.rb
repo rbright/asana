@@ -14,6 +14,21 @@ module Asana
       VCR.eject_cassette
     end
 
+    describe '.find' do
+      it 'should return a single task' do
+        task = Task.find(Workspace.all.first.tasks(:me).first.id)
+        task.must_be_instance_of Task
+      end
+    end
+
+    describe '#update' do
+      it 'should update the given task with a new name' do
+        task = Task.find(Workspace.all.first.tasks(:me).first.id)
+        task.update_attribute(:name, 'bar')
+        task.name.must_equal 'bar'
+      end
+    end
+
     describe '#create_story' do
       it 'should create a new story for the given task' do
         task = Project.all.first.tasks.first
