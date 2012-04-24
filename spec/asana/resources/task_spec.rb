@@ -29,6 +29,15 @@ module Asana
       end
     end
 
+    describe '#projects' do
+      it 'should return all projects for the given task' do
+        task = Project.all.first.tasks.first
+        projects = task.projects
+        projects.must_be_instance_of Array
+        projects.first.must_be_instance_of Project
+      end
+    end
+
     describe '#create_story' do
       it 'should create a new story for the given task' do
         task = Project.all.first.tasks.first

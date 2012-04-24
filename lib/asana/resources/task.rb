@@ -11,6 +11,10 @@ module Asana
       all(*args)
     end
 
+    def projects
+      Project.all_by_task(:params => { :task_id => self.id })
+    end
+
     def create_story(*args)
       path = "#{self.id}/stories"
       options = { :task => self.id }
