@@ -89,6 +89,9 @@ users = workspace.users
 
 # Create a new task in a given workspace and assign it to the current user
 workspace.create_task(:name => 'Get milk from the grocery store')
+
+# Create a new project in a given workspace, current user as a watcher
+workspace.create_project(:name => 'Upgrade Asana gem')
 ```
 
 ### [Projects][]
@@ -109,6 +112,9 @@ project = Asana::Project.find(:project_id)
 # Get all projects in a given workspace
 workspace = Asana::Workspace.find(:workspace_id)
 projects = workspace.projects
+
+# Change the name of a project
+project.modify(:name => 'New project name')
 ```
 
 ### [Tasks][]
@@ -136,6 +142,9 @@ workspace.create_task(:name => 'Get milk from the grocery store')
 
 # Create a new story for the given task
 task.create_story(story_settings)
+
+# Add a project to the task (tasks can be in multiple projects)
+task.add_project(project.id)
 ```
 
 ### [Stories][]
