@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../../spec_helper'
 
 module Asana
   describe Workspace do
@@ -39,10 +39,18 @@ module Asana
     describe '#create_task' do
       it 'should create a new task for the given workspace' do
         workspace = Workspace.all.first
-        task = workspace.create_task(:name => 'this is it', :assignee => 'me')
+        task = workspace.create_task(:name => 'asana-test-task', :assignee => 'me')
         task.must_be_instance_of Task
       end
     end
+
+    describe '#create_project' do
+      it 'should create a new project for the given workspace' do
+        workspace = Workspace.all.first
+        project = workspace.create_project(:name => 'asana-test-project')
+        project.must_be_instance_of Project
+      end
+    end    
 
     describe '#update' do
       it 'should update the given workspace with a new name' do

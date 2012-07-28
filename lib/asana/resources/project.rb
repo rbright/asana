@@ -18,5 +18,11 @@ module Asana
       Task.all_by_project(:params => { :project_id => self.id })
     end
 
+    def modify(modified_fields)
+      resource = Resource.new(modified_fields)
+      response = Project.put(self.id, nil, resource.to_json)
+      Project.new(connection.format.decode(response.body))
+    end    
+
   end
 end

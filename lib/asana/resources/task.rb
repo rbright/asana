@@ -11,8 +11,21 @@ module Asana
       all(*args)
     end
 
+    def modify(modified_fields)
+      resource = Resource.new(modified_fields)
+      response = Task.put(self.id, nil, resource.to_json)
+      Task.new(connection.format.decode(response.body))
+    end
+
     def projects
       Project.all_by_task(:params => { :task_id => self.id })
+    end
+
+    def add_project(project_id)
+      path = "#{self.id}/addProject"
+      resource = Resource.new({:project => project_id})
+      Task.post(path, nil, resource.to_json)
+      self
     end
 
     def create_story(*args)
