@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../../spec_helper'
 
 module Asana
   describe Task do
@@ -21,11 +21,10 @@ module Asana
       end
     end
 
-    describe '#update' do
-      it 'should update the given task with a new name' do
-        task = Task.find(Workspace.all.first.tasks(:me).first.id)
-        task.update_attribute(:name, 'bar')
-        task.name.must_equal 'bar'
+    describe '#modify' do
+      it 'should modify the given task with a new name' do
+        task = Workspace.all.first.create_task(:name => 'asana-test-foo', :assignee => 'me')
+        task.modify(:name => 'asana-test-bar').name.must_equal 'asana-test-bar'
       end
     end
 
@@ -38,6 +37,14 @@ module Asana
       end
     end
 
+    describe '#add_project' do
+      it 'should add the project to the given task' do
+        task = Workspace.all.first.create_task(:name => 'asana-test-task-add-project', :assignee => 'me')
+        project = Workspace.all.first.create_project(:name => 'asana-test-task-parent-project')
+        task.add_project project.id
+      end
+    end
+    
     describe '#create_story' do
       it 'should create a new story for the given task' do
         task = Project.all.first.tasks.first

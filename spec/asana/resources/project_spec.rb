@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../../spec_helper'
 
 module Asana
   describe Project do
@@ -43,12 +43,10 @@ module Asana
       end
     end
 
-    describe '#update' do
-      it 'should update the given project with a new name' do
-        project = Project.all.last
-        #project.name.wont_equal 'foo'
-        project.update_attribute(:name, 'foo')
-        project.name.must_equal 'foo'
+    describe '#modify' do
+      it 'should modify the given project with a new name' do
+        project = Workspace.all.first.create_project(:name => 'asana-test-project-foo')
+        project.modify(:name => 'asana-test-project-bar').name.must_equal 'asana-test-project-bar'
       end
     end
 
@@ -60,6 +58,14 @@ module Asana
         tasks.first.must_be_instance_of Task
       end
     end
+
+    describe '#create_story' do
+      it 'should create a new story for the given project' do
+        project = Workspace.all.first.create_project(:name => 'asana-test-project-story')
+        story = project.create_story(:text => 'foo')
+        story.must_be_instance_of Story
+      end
+    end    
 
   end
 end

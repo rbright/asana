@@ -8,6 +8,13 @@ module Asana
       Project.all_by_workspace(:params => { :workspace_id => self.id })
     end
 
+    def create_project(*args)
+      options = { :workspace => self.id }
+      project = Project.new(options.merge(args.first))
+      response = Project.post(nil, nil, project.to_json)
+      Project.new(connection.format.decode(response.body))
+    end
+
     def tasks(assignee)
       query_options = { :workspace => self.id, :assignee => assignee }
       Task.all_by_workspace(:params => query_options)
