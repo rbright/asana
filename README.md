@@ -165,8 +165,9 @@ stories = task.stories
 # Get a specific story
 story = Story.find(:story_id)
 
-# Create a new story for the given task
+# Create a new story for the given task/project
 task.create_story(story_settings)
+project.create_story(story_settings)
 ```
 
 ## Contributing

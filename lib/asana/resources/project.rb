@@ -22,6 +22,13 @@ module Asana
       resource = Resource.new(modified_fields)
       response = Project.put(self.id, nil, resource.to_json)
       Project.new(connection.format.decode(response.body))
+    end
+    
+    def create_story(*args)
+      path = "#{self.id}/stories"
+      story = Story.new(args.first)
+      response = Project.post(path, nil, story.to_json)
+      Story.new(connection.format.decode(response.body))
     end    
 
   end
