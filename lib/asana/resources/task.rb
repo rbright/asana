@@ -40,5 +40,18 @@ module Asana
       Story.all_by_task(:params => { :task_id => self.id })
     end
 
+    def create_subtask(*args)
+      path = "#{self.id}/subtasks"
+      options = { :task => self.id }
+      task = Task.new(options.merge(args.first))
+      response = Task.post(path, nil, task.to_json)
+      Task.new(connection.format.decode(response.body).merge parent: self)
+    end
+
+    def subtasks
+      path = "#{self.id}/subtasks"
+      Task.get(path, nil).map { |subtask| Task.new(subtask.merge(parent: self)) }
+    end
+
   end
 end

@@ -44,7 +44,7 @@ module Asana
         task.add_project project.id
       end
     end
-    
+
     describe '#create_story' do
       it 'should create a new story for the given task' do
         task = Project.all.first.tasks.first
@@ -59,6 +59,27 @@ module Asana
         stories = task.stories
         stories.must_be_instance_of Array
         stories.first.must_be_instance_of Story
+      end
+    end
+
+    describe '#create_subtask' do
+      it 'should create a new subtask for the given task' do
+        task = Project.all.first.tasks.first
+        subtask = task.create_subtask(:name => 'asana-test-subtask', :assignee => 'me')
+        subtask.must_be_instance_of Task
+        subtask.parent.must_be_instance_of Task
+        subtask.parent.id.must_equal task.id
+      end
+    end
+
+    describe '#subtasks' do
+      it 'should return all subtasks for the given task' do
+        task = Project.all.first.tasks.first
+        subtasks = task.subtasks
+        subtasks.must_be_instance_of Array
+        subtasks.first.must_be_instance_of Task
+        subtasks.first.parent.must_be_instance_of Task
+        subtasks.first.parent.id.must_equal task.id
       end
     end
 
