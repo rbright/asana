@@ -28,6 +28,13 @@ module Asana
       self
     end
 
+    def add_tag(tag_id)
+      path = "#{self.id}/addTag"
+      resource = Resource.new({:tag => tag_id})
+      Task.post(path, nil, resource.to_json)
+      self
+    end
+
     def create_story(*args)
       path = "#{self.id}/stories"
       options = { :task => self.id }
