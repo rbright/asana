@@ -50,11 +50,11 @@ module Asana
         project = workspace.create_project(:name => 'asana-test-project')
         project.must_be_instance_of Project
       end
-    end    
+    end
 
     describe '#update' do
       it 'should update the given workspace with a new name' do
-        workspace = Workspace.all.last
+        workspace = Workspace.all[1]
         workspace.update_attribute(:name, 'foo')
         workspace.name.must_equal 'foo'
       end
@@ -73,6 +73,15 @@ module Asana
         projects = workspace.projects
         projects.must_be_instance_of Array
         projects.first.must_be_instance_of Project
+      end
+    end
+
+    describe '#tags' do
+      it 'should return all tags for the given workspace' do
+        workspace = Workspace.all.first
+        tags = workspace.tags
+        tags.must_be_instance_of Array
+        tags.first.must_be_instance_of Tag
       end
     end
 
