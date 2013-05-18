@@ -54,7 +54,7 @@ module Asana
 
     describe '#update' do
       it 'should update the given workspace with a new name' do
-        workspace = Workspace.all[1]
+        workspace = Workspace.all.last
         workspace.update_attribute(:name, 'foo')
         workspace.name.must_equal 'foo'
       end
