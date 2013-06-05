@@ -6,6 +6,11 @@ module Asana
       all(*args)
     end
 
+    def self.all_by_tag(*args)
+      parent_resources :tag
+      all(*args)
+    end
+
     def self.all_by_workspace(*args)
       parent_resources :workspace
       all(*args)
