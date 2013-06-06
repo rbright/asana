@@ -6,6 +6,11 @@ module Asana
       all(*args)
     end
 
+    def self.all_by_tag(*args)
+      parent_resources :tag
+      all(*args)
+    end
+
     def self.all_by_workspace(*args)
       parent_resources :workspace
       all(*args)
@@ -21,9 +26,20 @@ module Asana
       Project.all_by_task(:params => { :task_id => self.id })
     end
 
+    def tags
+      Tag.all_by_task(:params => { :task_id => self.id })
+    end
+
     def add_project(project_id)
       path = "#{self.id}/addProject"
       resource = Resource.new({:project => project_id})
+      Task.post(path, nil, resource.to_json)
+      self
+    end
+
+    def add_tag(tag_id)
+      path = "#{self.id}/addTag"
+      resource = Resource.new({:tag => tag_id})
       Task.post(path, nil, resource.to_json)
       self
     end
@@ -38,6 +54,19 @@ module Asana
 
     def stories
       Story.all_by_task(:params => { :task_id => self.id })
+    end
+
+    def create_subtask(*args)
+      path = "#{self.id}/subtasks"
+      options = { :task => self.id }
+      task = Task.new(options.merge(args.first))
+      response = Task.post(path, nil, task.to_json)
+      Task.new(connection.format.decode(response.body).merge parent: self)
+    end
+
+    def subtasks
+      path = "#{self.id}/subtasks"
+      Task.get(path, nil).map { |subtask| Task.new(subtask.merge(parent: self)) }
     end
 
   end

@@ -1,5 +1,5 @@
 module Asana
-  class Project < Asana::Resource
+  class Tag < Asana::Resource
 
     alias :create :method_not_allowed
     alias :destroy :method_not_allowed
@@ -15,13 +15,13 @@ module Asana
     end
 
     def tasks
-      Task.all_by_project(:params => { :project_id => self.id })
+      Task.all_by_tag(:params => { :tag_id => self.id })
     end
 
     def modify(modified_fields)
       resource = Resource.new(modified_fields)
-      response = Project.put(self.id, nil, resource.to_json)
-      Project.new(connection.format.decode(response.body))
+      response = Tag.put(self.id, nil, resource.to_json)
+      Tag.new(connection.format.decode(response.body))
     end
 
   end
