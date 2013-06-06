@@ -20,7 +20,7 @@ module Asana
 
     def modify(modified_fields)
       resource = Resource.new(modified_fields)
-      response = Project.put(self.id, nil, resource.to_json)
+      response = Tag.put(self.id, nil, resource.to_json)
       Tag.new(connection.format.decode(response.body))
     end
 
