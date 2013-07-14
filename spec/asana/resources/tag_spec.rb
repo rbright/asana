@@ -52,8 +52,8 @@ module Asana
 
     describe '#tasks' do
       it 'should return all tasks for the given tag' do
-        tags = Tag.all.first
-        tasks = tags.tasks
+        tag = Tag.all.first
+        tasks = tag.tasks
         tasks.must_be_instance_of Array
         tasks.first.must_be_instance_of Task
       end
