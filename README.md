@@ -159,7 +159,15 @@ task.add_project(project.id)
 
 ### [Tags][]
 
-``ruby
+> A tag is a label that can be attached to any task in Asana. It exists in
+> a single workspace or organization.
+>
+> Tags have some metadata associated with them, but it is possible that we will
+> simplify them in the future so it is not encouraged to rely too heavily on
+> it. Unlike projects, tags do not provide any ordering on the tasks they are
+> associated with.
+
+```ruby
 # Get all tags in a given workspace
 workspace = Asana::Workspace.find(:workspace_id)
 tags = workspace.tags
@@ -214,3 +222,4 @@ task.create_story(story_settings)
 [Projects]: http://developer.asana.com/documentation/#projects
 [Tasks]: http://developer.asana.com/documentation/#tasks
 [Stories]: http://developer.asana.com/documentation/#stories
+[Tags]: http://developer.asana.com/documentation/#tags
