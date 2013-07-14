@@ -10,7 +10,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'activeresource', '~> 3.2.3'
 
-  gem.add_development_dependency 'growl', '~> 1.0.3'
   gem.add_development_dependency 'guard-minitest', '~> 0.5.0'
   gem.add_development_dependency 'minitest', '~> 2.12.1'
   gem.add_development_dependency 'rake', '~> 0.9.2.2'
