@@ -87,11 +87,17 @@ tasks = workspace.tasks(:user_id)
 # Get all users with access to a given workspace
 users = workspace.users
 
+# Get all tags in a given workspace
+tags = workspace.tags
+
 # Create a new task in a given workspace and assign it to the current user
 workspace.create_task(:name => 'Get milk from the grocery store')
 
 # Create a new project in a given workspace, current user as a watcher
 workspace.create_project(:name => 'Upgrade Asana gem')
+
+# Create a new tag in a given workspace
+workspace.create_tag(:name => 'Programming')
 ```
 
 ### [Projects][]
@@ -133,6 +139,10 @@ tasks = project.tasks
 workspace = Asana::Workspace.find(:workspace_id)
 tasks = workspace.tasks
 
+# Get all tasks with a given tag
+tag = Asana::Tag.find(:tag_id)
+tasks = tag.tasks
+
 # Get all stories for a given task
 task = tasks.first
 stories = task.stories
@@ -145,6 +155,25 @@ task.create_story(story_settings)
 
 # Add a project to the task (tasks can be in multiple projects)
 task.add_project(project.id)
+```
+
+### [Tags][]
+
+``ruby
+# Get all tags in a given workspace
+workspace = Asana::Workspace.find(:workspace_id)
+tags = workspace.tags
+
+# Get all tasks with a given tag
+tag = Asana::Tag.find(:tag_id)
+tasks = tag.tasks
+
+# Create a new tag in a given workspace
+workspace.create_tag(:name => 'Programming')
+
+# Update a tag
+tag = Asana::Tag.find(:tag_id)
+tag.modify(:name => 'Development')
 ```
 
 ### [Stories][]
@@ -167,7 +196,6 @@ story = Story.find(:story_id)
 
 # Create a new story for the given task/project
 task.create_story(story_settings)
-project.create_story(story_settings)
 ```
 
 ## Contributing
