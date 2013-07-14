@@ -8,6 +8,10 @@ module Asana
       Project.all_by_workspace(:params => { :workspace_id => self.id })
     end
 
+    def tags
+      Tag.all_by_workspace(:params => { :workspace_id => self.id })
+    end
+
     def create_project(*args)
       options = { :workspace => self.id }
       project = Project.new(options.merge(args.first))
