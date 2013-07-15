@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Ruby wrapper for the Asana REST API}
   gem.summary       = %q{Ruby wrapper for the Asana REST API}
   gem.homepage      = "http://github.com/rbright/asana"
+  gem.license       = 'MIT'
 
   gem.add_dependency 'activeresource', '~> 3.2.3'
 
