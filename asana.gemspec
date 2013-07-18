@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://github.com/rbright/asana"
   gem.license       = 'MIT'
 
-  gem.add_dependency 'activeresource', '~> 3.2.3'
+  gem.add_dependency 'activeresource', '>= 3.2.3'
 
   gem.add_development_dependency 'guard-minitest', '~> 1.0.0'
   gem.add_development_dependency 'minitest', '~> 2.12.1'
