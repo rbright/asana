@@ -37,6 +37,13 @@ module Asana
       self
     end
 
+    def remove_project(project_id)
+      path = "#{self.id}/removeProject"
+      resource = Resource.new({:project => project_id})
+      Task.post(path, nil, resource.to_json)
+      self
+    end
+
     def add_tag(tag_id)
       path = "#{self.id}/addTag"
       resource = Resource.new({:tag => tag_id})
