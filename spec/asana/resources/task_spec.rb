@@ -45,6 +45,14 @@ module Asana
       end
     end
 
+    describe '#remove_project' do
+      it 'should remove the project from the given task' do
+        project = Workspace.all.first.create_project(:name => 'asana-test-task-parent-remove-project')
+        task = Workspace.all.first.create_task(:name => 'asana-test-task-remove-project', :assignee => 'me', :projects => [project.id])
+        task.remove_project project.id
+      end
+    end
+
     describe '#add_tag' do
       it 'should add the tag to the given task' do
         task = Workspace.all.first.create_task(:name => 'asana-test-task-add-tag', :assignee => 'me')
