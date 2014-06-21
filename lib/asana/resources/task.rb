@@ -56,6 +56,10 @@ module Asana
       Story.all_by_task(:params => { :task_id => self.id })
     end
 
+    def attachments
+      Attachment.all_by_task(:params => { :task_id => self.id })
+    end
+
     def create_subtask(*args)
       path = "#{self.id}/subtasks"
       options = { :task => self.id }
