@@ -26,7 +26,7 @@ module Asana
       Project.all_by_task(:params => { :task_id => self.id })
     end
 
-    def tags
+    def all_tags
       Tag.all_by_task(:params => { :task_id => self.id })
     end
 
