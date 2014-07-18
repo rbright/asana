@@ -15,8 +15,9 @@ module Asana
       Project.new(connection.format.decode(response.body))
     end
 
-    def tasks(assignee)
+    def tasks(assignee, options = {})
       query_options = { :workspace => self.id, :assignee => assignee }
+      query_options = query_options.merge(options)
       Task.all_by_workspace(:params => query_options)
     end
 
