@@ -16,7 +16,7 @@ module Asana
     end
 
     def tasks(assignee)
-      query_options = { :workspace => self.id, :assignee => assignee }
+      query_options = { :workspace => self.id, :assignee => assignee, :opt_expand => '.'}
       Task.all_by_workspace(:params => query_options)
     end
 
