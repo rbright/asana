@@ -94,7 +94,7 @@ tags = workspace.tags
 workspace.create_task(:name => 'Get milk from the grocery store')
 
 # Create a new project in a given workspace, current user as a watcher
-workspace.create_project(:name => 'Upgrade Asana gem')
+workspace.create_project(:name => 'Upgrade Asana gem', :team => :team_id)
 
 # Create a new tag in a given workspace
 workspace.create_tag(:name => 'Programming')
