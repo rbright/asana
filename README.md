@@ -1,5 +1,7 @@
 # Asana
 
+**Note: This library is no longer maintained. More importantly, I've transferred ownership of the "asana" gem to Asana itself as part of their strategy to maintain first-class client libraries. You can find their library [here](https://github.com/Asana/ruby-asana). The RubyGems version history will be preserved such that those using this library will be unaffected.**
+
 This gem is a simple Ruby wrapper for the Asana REST API. It uses
 [ActiveResource][] to provide a simple, familiar interface for accessing
 your Asana account.
