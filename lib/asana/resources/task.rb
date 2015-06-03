@@ -26,10 +26,6 @@ module Asana
       Project.all_by_task(:params => { :task_id => self.id })
     end
 
-    def tags
-      Tag.all_by_task(:params => { :task_id => self.id })
-    end
-
     def add_project(project_id)
       path = "#{self.id}/addProject"
       resource = Resource.new({:project => project_id})
@@ -54,6 +50,10 @@ module Asana
 
     def stories
       Story.all_by_task(:params => { :task_id => self.id })
+    end
+
+    def attachments
+      Attachment.all_by_task(:params => { :task_id => self.id })
     end
 
     def create_subtask(*args)

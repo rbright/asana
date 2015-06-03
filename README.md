@@ -43,7 +43,7 @@ Asana::User.me
 
 > A user object represents an account in Asana that can be given access to
 > various workspaces, projects, and tasks.
-> 
+>
 > Like other objects in the system, users are referred to by numerical IDs.
 > However, the special string identifier me can be used anywhere a user ID is
 > accepted, to refer to the current authenticated user.
@@ -133,6 +133,13 @@ project.modify(:name => 'New project name')
 > determine the more detailed information presented in the details pane.
 
 ```ruby
+# Get single task from id
+task = Asana::Task.find(:task_id)
+
+# Get all attachments for a single task
+task = Asana::Task.find(:task_id)
+task.attachments
+
 # Get all tasks in a given project
 project = Asana::Project.find(:project_id)
 tasks = project.tasks
