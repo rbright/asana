@@ -13,6 +13,7 @@ module Asana
     def configure
       yield self
       Resource.site      = DEFAULT_ENDPOINT
+      Resource.proxy     = ENV['https_proxy'] if ENV['https_proxy']
       Resource.user      = self.api_key
       Resource.password  = ''
       Resource.format    = :json
